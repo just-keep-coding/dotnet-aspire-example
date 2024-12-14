@@ -1,0 +1,12 @@
+POST http://localhost:5119/telemetries
+Content-Type: application/json
+device-id: 01938393-9234-75d2-9691-85677964af69
+
+{
+    "timestamp": "{{$isoTimestamp}}",
+    "heartRate": 72,
+    "bloodOxygenLevel": 98,
+    "BloodPressureSystolic": 120,
+    "BloodPressureDiastolic": 90,
+    "activityLevel": "Moderate"
+}

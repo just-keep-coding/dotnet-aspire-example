@@ -1,0 +1,85 @@
+﻿services:
+
+  healthy-db:
+    image: postgres:latest
+    container_name: healthy-db
+    hostname: healthy-db
+    volumes:
+      - ./.containers/db:/var/lib/postgresql/data
+    ports:
+      - '5433:5433'
+    command: -p 5433
+    environment:
+      - POSTGRES_DB=healthy
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d healthy -h localhost -p 5433"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  healthy-mq:
+    image: rabbitmq:management
+    container_name: healthy-mq
+    hostname: healthy-mq
+    volumes:
+      - ./.containers/queue/data/:/var/lib/rabbitmq
+      - ./.containers/queue/log/:/var/log/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    healthcheck:
+      test: ["CMD-SHELL", "rabbitmq-diagnostics check_port_listener 5672 && rabbitmq-diagnostics check_running"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+      start_period: 10s
+
+  healthy-devices-api:
+    image: healthy-devices-api
+    container_name: healthy-devices-api
+    depends_on:
+      healthy-db:
+        condition: service_healthy
+      healthy-mq:
+        condition: service_healthy
+    build:
+      context: .
+      dockerfile: src/Healthy.Presentation.DevicesApi/Dockerfile
+    ports:
+      - "5119:5119"
+    environment:
+      - ASPNETCORE_URLS=http://+:5119
+
+  healthy-users-api:
+    image: healthy-users-api
+    container_name: healthy-users-api
+    depends_on:
+      healthy-db:
+        condition: service_healthy
+      healthy-mq:
+        condition: service_healthy
+    build:
+      context: .
+      dockerfile: src/Healthy.Presentation.UsersApi/Dockerfile
+    ports:
+      - "5219:5219"
+    environment:
+      - ASPNETCORE_URLS=http://+:5219
+
+  healthy-worker:
+    image: healthy-worker
+    container_name: healthy-worker
+    depends_on:
+      healthy-db:
+        condition: service_healthy
+      healthy-mq:
+        condition: service_healthy
+    build:
+      context: .
+      dockerfile: src/Healthy.Presentation.Worker/Dockerfile

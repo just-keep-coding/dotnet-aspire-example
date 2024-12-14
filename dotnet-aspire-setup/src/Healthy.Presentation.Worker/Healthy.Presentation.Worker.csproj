@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MassTransit" Version="8.3.3" />
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.3" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Healthy.Core.Application\Healthy.Core.Application.csproj" />
+      <ProjectReference Include="..\Healthy.CrossCuttingConcerns\Healthy.CrossCuttingConcerns.csproj" />
+      <ProjectReference Include="..\Healthy.Infrastructure.Database\Healthy.Infrastructure.Database.csproj" />
+      <ProjectReference Include="..\Healthy.Presentation.ServiceDefaults\Healthy.Presentation.ServiceDefaults.csproj" />
+    </ItemGroup>
+</Project>

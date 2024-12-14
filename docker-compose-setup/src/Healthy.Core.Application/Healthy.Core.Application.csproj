@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Core.Application</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MediatR" Version="12.2.0"/>
+        <PackageReference Include="MassTransit" Version="8.3.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Healthy.Core.Domain\Healthy.Core.Domain.csproj" />
+      <ProjectReference Include="..\Healthy.CrossCuttingConcerns\Healthy.CrossCuttingConcerns.csproj" />
+    </ItemGroup>
+
+</Project>

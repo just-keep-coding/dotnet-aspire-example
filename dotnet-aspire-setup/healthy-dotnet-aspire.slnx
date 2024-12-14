@@ -1,0 +1,20 @@
+﻿<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/core/">
+    <Project Path="src\Healthy.Core.Application\Healthy.Core.Application.csproj" Type="Classic C#" />
+    <Project Path="src\Healthy.Core.Domain\Healthy.Core.Domain.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/cross-cutting/">
+    <Project Path="src\Healthy.CrossCuttingConcerns\Healthy.CrossCuttingConcerns.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/infrastructure/">
+    <Project Path="src\Healthy.Infrastructure.Database\Healthy.Infrastructure.Database.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/presentation/">
+    <Project Path="src\Healthy.Presentation.AppHost\Healthy.Presentation.AppHost.csproj" Type="Classic C#" />
+    <Project Path="src\Healthy.Presentation.DevicesApi\Healthy.Presentation.DevicesApi.csproj" Type="Classic C#" />
+    <Project Path="src\Healthy.Presentation.ServiceDefaults\Healthy.Presentation.ServiceDefaults.csproj" Type="Classic C#" />
+    <Project Path="src\Healthy.Presentation.UsersApi\Healthy.Presentation.UsersApi.csproj" Type="Classic C#" />
+    <Project Path="src\Healthy.Presentation.Worker\Healthy.Presentation.Worker.csproj" Type="Classic C#" />
+  </Folder>
+</Solution>
